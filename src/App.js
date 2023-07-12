@@ -1,6 +1,8 @@
+import Hi from "./Train";
+
 function App() {
   return (
-    <h1>Amir</h1>
+    <Hi />
   );
 }
 
