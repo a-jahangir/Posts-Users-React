@@ -16,7 +16,7 @@ const Home = () => {
                     </p>
                     <Link className="btn btn-dark" to="/users">Users</Link>
                     <Link className="btn btn-light ms-3" to="/posts">Posts</Link>
-                </div>
+                </div> 
             </div>
         </div >
     )
