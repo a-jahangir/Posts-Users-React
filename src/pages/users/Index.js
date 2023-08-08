@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import ListUsers from "../components/users/List"
+import ListUsers from "../../components/users/List"
 
-const Users = () => {
+const IndexUser = () => {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -33,4 +33,4 @@ const Users = () => {
     )
 }
 
-export default Users
+export default IndexUser
