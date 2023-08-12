@@ -52,7 +52,7 @@ const CreatePost = () => {
                     <div className="form-text text-danger">{body ? '' : 'Body is required'}</div>
                 </div>
                 <button type="submit" className="btn btn-dark" disabled={title === '' || body === ''}>
-                    {loading && <div className="spinner-border spinner-border-sm"></div>}
+                    {loading && <div className="spinner-border spinner-border-sm me-2"></div>}
                     Create
                 </button>
                 {error && <div className="mt-2 fw-bold text-danger">{error}</div>}
