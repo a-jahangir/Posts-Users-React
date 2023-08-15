@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-const CreatePost = () => {
+const EditForm = ({ post }) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [loading, setLoading] = useState(false);
@@ -11,12 +11,13 @@ const CreatePost = () => {
         e.preventDefault(e)
         setLoading(true)
 
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
+        fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
+            method: 'PUT',
             body: JSON.stringify({
                 title,
                 body,
                 userId: 1,
+                id: post.id
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -28,7 +29,7 @@ const CreatePost = () => {
                 setError(null)
                 Swal.fire(
                     'Good job!',
-                    'You clicked the button!',
+                    'Post Edited!',
                     'success'
                 )
             }).catch(err => {
@@ -37,23 +38,27 @@ const CreatePost = () => {
             });
     }
 
+    useEffect(() => {
+        setTitle(post.title)
+        setBody(post.body)
+    }, [post])
+
     return (
         <div className="col-md-6">
-            <h2>Create Post :</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-3">
                     <label className="form-label">Title</label>
-                    <input onChange={(e) => setTitle(e.target.value)} type="text" className="form-control" />
+                    <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" className="form-control" />
                     <div className="form-text text-danger">{title ? '' : 'Title is required'}</div>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Body</label>
-                    <textarea onChange={(e) => setBody(e.target.value)} className="form-control" rows="3" />
+                    <textarea onChange={(e) => setBody(e.target.value)} value={body} className="form-control" rows="5" />
                     <div className="form-text text-danger">{body ? '' : 'Body is required'}</div>
                 </div>
                 <button type="submit" className="btn btn-dark" disabled={title === '' || body === ''}>
                     {loading && <div className="spinner-border spinner-border-sm me-2"></div>}
-                    Create
+                    Edit
                 </button>
                 {error && <div className="mt-2 fw-bold text-danger">{error}</div>}
             </form>
@@ -61,4 +66,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default EditForm

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ShowPost = () => {
     const [post, setPost] = useState(null);
@@ -26,13 +26,17 @@ const ShowPost = () => {
         <>
             {error && <div>{error}</div>}
             {loading && <div className="spinner-border"></div>}
-            {post && <div className="col-md-4">
+            {post && <div className="col-md-8">
                 <div className="card">
                     <div className="card-header fw-bold">
                         <p>{post.title}</p>
                     </div>
                     <div className="card-body">
                         {post.body}
+                    </div>
+                    <div className="card-footer">
+                        <Link className="me-2 btn btn-dark" to={`/posts/edit/${id}`}>Edit</Link>
+                        <Link className="btn btn-danger" to={`/posts/edit/${id}`}>Delete</Link>
                     </div>
                 </div>
             </div>}
