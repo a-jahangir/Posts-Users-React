@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom";
+import DeletePost from "../../components/posts/Delete";
 
 const ShowPost = () => {
     const [post, setPost] = useState(null);
@@ -26,7 +27,7 @@ const ShowPost = () => {
         <>
             {error && <div>{error}</div>}
             {loading && <div className="spinner-border"></div>}
-            {post && <div className="col-md-8">
+            {post && <div className="col-md-6">
                 <div className="card">
                     <div className="card-header fw-bold">
                         <p>{post.title}</p>
@@ -35,8 +36,8 @@ const ShowPost = () => {
                         {post.body}
                     </div>
                     <div className="card-footer">
-                        <Link className="me-2 btn btn-dark" to={`/posts/edit/${id}`}>Edit</Link>
-                        <Link className="btn btn-danger" to={`/posts/edit/${id}`}>Delete</Link>
+                        <Link className="me-2 btn btn-sm btn-dark" to={`/posts/edit/${id}`}>Edit</Link>
+                        <DeletePost postId={post.id}/>
                     </div>
                 </div>
             </div>}
